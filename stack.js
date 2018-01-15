@@ -5,7 +5,7 @@ class Stack {
     this.size = 0;
   }
   
-  // => add value to collection
+  // add value to collection
   push(value) { // 
     if(this.size >= this.max_rooms) {
       this.pop();
