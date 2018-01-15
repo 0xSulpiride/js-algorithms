@@ -1,41 +1,35 @@
-class Stack { 
-  constructor(max_rooms) {
-    this.storage = '';
-    this.max_rooms = max_rooms;
-    this.size = 0;
+class Stack {
+  constructor(capacity) {
+    this._storage = {}
+    this._capacity = capacity || Infinity
+    this._count = 0
   }
-  
-  // => add value to collection
-  push(value) { // 
-    if(this.size >= this.max_rooms) {
-      this.pop();
+
+  push(value) {
+    if(this._count < this._capacity) {
+      this._storage[this._count++] = value
+      return this._count
     }
-    this.storage = this.storage.concat('***', value);
-    this.size = this.size + 1;
+    return 'Max capacity already reached. Remove element before adding a new one.'
   }
-  
-  // => most recent element added collection
-  // removes item 
-  pop() { 
-    var str = this.storage.slice(this.storage.lastIndexOf('***') + 3);
-    this.storage = this.storage.substring(0, this.storage.lastIndexOf('***'));
-    this.size = this.size - 1;
-    return str;
+
+  pop() {
+    if(this.count == 0)
+      return 'No element inside the stack. Add element before poping.'
+    var value = this._storage[--this.count]
+    delete this._storage[this._count]
+    return value;
   }
-  
-  // => most recent element added collection. 
-  // similar to pop, but doesnt remove element from collection
-  peek() { 
-    return this.storage.slice(this.storage.lastIndexOf('***') + 3);
+
+  peek() {
+    return this._storage[this._count - 1]
   }
-  
-  // => number of elements in collection
-  size() { 
-    return this.size;
+
+  count() {
+    return this._count;
   }
-  
-  // => number of pops until you get to a certain value:
-  until(value) { 
-    return this.storage.split('***').indexOf(value);
+
+  until(value) {
+    return Object.values(this._storage).reverse().indexOf(value);
   }
 }
