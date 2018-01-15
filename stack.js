@@ -30,6 +30,6 @@ class Stack {
   }
 
   until(value) {
-    return Object.values(this._storage).reverse().indexOf(value);
+    return Object.values(this._storage).reverse().indexOf(value)
   }
 }
