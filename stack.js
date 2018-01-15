@@ -33,3 +33,5 @@ class Stack {
     return Object.values(this._storage).reverse().indexOf(value)
   }
 }
+
+export default Stack
